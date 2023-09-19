@@ -1,7 +1,5 @@
 # Sturdy Couscous
 
-![Project Image](project_image.png)
-
 ## Description
 
 The Sturdy Couscous is a web application that allows users to search for weather information for different cities. It integrates with a third-party weather API to fetch weather data and displays it to the users in a user-friendly manner, currently it limited to next 12 hours forcast only.

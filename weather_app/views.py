@@ -40,8 +40,8 @@ class AutocompleteCity(APIView):
     @method_decorator(cache_page(60*60*2))
     def get(self, request):
         payload = {
-            'apikey'    : settings.WEATHER_API_KEY,
-            'q'     : request.GET.get("q"),
+            'apikey' : settings.WEATHER_API_KEY,
+            'q' : request.GET.get("q"),
         }
         print(payload)
         res = requests.get(self.url, params=payload)
@@ -72,12 +72,18 @@ class SerchCityWeather(APIView):
         city_name = request.GET.get("city_name")
 
         payload = {
-            'apikey'    : settings.WEATHER_API_KEY,
+            'apikey' : settings.WEATHER_API_KEY,
         }
         print(payload)
         res = requests.get(f"{self.url}{city_id}", params=payload)
         
         print(res, res.json())
+        store_data = SearchData.objects.create(
+            user = request.user,
+            city = city_name,
+            city_id = city_id,
+            weather = res.json(),
+        )
 
         return Response(res.json(), status=200)
 

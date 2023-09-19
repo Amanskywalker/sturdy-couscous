@@ -80,7 +80,6 @@
           city_name : selectedCityName
         },
         success: function (data) {
-          weatherData = data;
 
           function convertToLocalTime(utcDateTime) {
             var utcDate = new Date(utcDateTime);
@@ -116,7 +115,7 @@
               });
           }
 
-          addCardsToContainer(weatherData);
+          addCardsToContainer(data);
         }
       })
     });

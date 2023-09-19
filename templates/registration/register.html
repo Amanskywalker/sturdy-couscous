@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="flex-shrink-0">
+    <div class="container">
+        <h1 class="mt-5">Register</h1>
+        <div class="justify-content-center">
+        {% if form.errors %}
+            <p>Your username and password didn't match. Please try again.</p>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+        <p>Your account doesn't have access to this page. To proceed, please login with an account that has access.</p>
+        {% else %}
+        <form class="align-self-center col-lg-6" method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+            <label for="id_username" class="form-label">Username</label>
+            <input type="text" class="form-control" name="username" maxlength="150" autocapitalize="none" autofocus="" required="" id="id_username">
+            </div>
+            <div class="mb-3">
+            <label for="id_password1" class="form-label">Password</label>
+            <input type="password" class="form-control" name="password1" autocomplete="new-password" required="" id="id_password1">
+            </div>
+            <div class="mb-3">
+            <label for="id_password2" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" name="password2" autocomplete="new-password" required="" id="id_password2">
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+        <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+        {% endif %}
+        </div>
+    </div>
+</main>
+{% endblock %}

@@ -77,7 +77,7 @@ class SerchCityWeather(APIView):
         
         print(res, res.json())
         store_data = SearchData.objects.create(
-            user = request.user,
+            user = request.user if request.user.is_authenticated else None,
             city = city_name,
             city_id = city_id,
             weather = res.json(),
